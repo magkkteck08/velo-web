@@ -67,7 +67,7 @@ export default function GamePage() {
 
   const fetchSquad = async () => {
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/game/squad/${userId}`);
+      const res = await fetch(`https://velo-backend-ajjw.onrender.com/api/game/squad/${userId}`);
       if (res.ok) setSquad(await res.json());
     } catch (e) { console.error(e); } 
     finally { setLoading(false); setScreen("squad"); }
@@ -76,7 +76,7 @@ export default function GamePage() {
   const handleDraftSquad = async () => {
     setDrafting(true);
     // FIXED: Updated endpoint to match the new backend route
-    const res = await fetch(`http://127.0.0.1:8000/api/game/draft/${userId}`, { method: "POST" });
+    const res = await fetch(`https://velo-backend-ajjw.onrender.com/api/game/draft/${userId}`, { method: "POST" });
     if (res.ok) await fetchSquad();
     setDrafting(false);
   };
@@ -207,7 +207,7 @@ export default function GamePage() {
         cancelAnimationFrame(rafId);
         
         // SECURE: Send Match Result to Python Database & Collect Coins
-        fetch(`http://127.0.0.1:8000/api/game/match-result/${userId}`, {
+        fetch(`https://velo-backend-ajjw.onrender.com/api/game/match-result/${userId}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ 

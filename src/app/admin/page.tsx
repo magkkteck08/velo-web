@@ -20,10 +20,10 @@ export default function AdminDashboard() {
       setLoading(true);
       try {
         if (activeTab === "inquiries") {
-          const res = await fetch("http://127.0.0.1:8000/api/admin/inquiries");
+          const res = await fetch("https://velo-backend-ajjw.onrender.com/api/admin/inquiries");
           if (res.ok) setInquiries(await res.json());
         } else {
-          const res = await fetch("http://127.0.0.1:8000/api/admin/applications");
+          const res = await fetch("https://velo-backend-ajjw.onrender.com/api/admin/applications");
           if (res.ok) setApplications(await res.json());
         }
       } catch (error) {

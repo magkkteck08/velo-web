@@ -32,7 +32,7 @@ export default function Services() {
 
     try {
       // 2. We use 127.0.0.1 to avoid Windows IPv6 localhost routing issues
-      const response = await fetch("http://127.0.0.1:8000/api/inquire", {
+      const response = await fetch("https://velo-backend-ajjw.onrender.com/api/inquire", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

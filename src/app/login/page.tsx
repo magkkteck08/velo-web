@@ -24,7 +24,7 @@ export default function AuthPage() {
     try {
       if (isLogin) {
         // --- LOGIN LOGIC ---
-        const res = await fetch("http://127.0.0.1:8000/api/auth/login", {
+        const res = await fetch("https://velo-backend-ajjw.onrender.com/api/auth/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password }),
@@ -44,7 +44,7 @@ export default function AuthPage() {
         }
       } else {
         // --- REGISTER LOGIC ---
-        const res = await fetch("http://127.0.0.1:8000/api/auth/register", {
+        const res = await fetch("https://velo-backend-ajjw.onrender.com/api/auth/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, password, name }),

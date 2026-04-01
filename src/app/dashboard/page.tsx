@@ -48,9 +48,9 @@ export default function DashboardPage() {
     const fetchData = async () => {
       try {
         const [prodRes, statsRes, dashRes] = await Promise.all([
-          fetch(`http://127.0.0.1:8000/api/inventory/${userId}`),
-          fetch(`http://127.0.0.1:8000/api/sales/${userId}`),
-          fetch(`http://127.0.0.1:8000/api/dashboard/${userId}`) // The new endpoint!
+          fetch(`https://velo-backend-ajjw.onrender.com/api/inventory/${userId}`),
+          fetch(`https://velo-backend-ajjw.onrender.com/api/sales/${userId}`),
+          fetch(`https://velo-backend-ajjw.onrender.com/api/dashboard/${userId}`) // The new endpoint!
         ]);
         
         // We only log errors if they fail, we don't crash the whole page
@@ -80,7 +80,7 @@ export default function DashboardPage() {
     if (!newItem.name || !newItem.price || !newItem.stock || !userId) return;
     const priceInKobo = Math.round(parseFloat(newItem.price) * 100);
 
-    const res = await fetch("http://127.0.0.1:8000/api/inventory/add", {
+    const res = await fetch("https://velo-backend-ajjw.onrender.com/api/inventory/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: newItem.name, price: priceInKobo, stock: parseInt(newItem.stock), owner_id: userId }),
@@ -90,20 +90,20 @@ export default function DashboardPage() {
       setIsAdding(false);
       setNewItem({ name: "", price: "", stock: "" });
       // Quick re-fetch for products
-      const pRes = await fetch(`http://127.0.0.1:8000/api/inventory/${userId}`);
+      const pRes = await fetch(`https://velo-backend-ajjw.onrender.com/api/inventory/${userId}`);
       if (pRes.ok) setProducts(await pRes.json());
     }
   };
 
   const handleSaveEdit = async (product: Product) => {
     if(!userId) return;
-    await fetch(`http://127.0.0.1:8000/api/inventory/${product.id}`, {
+    await fetch(`https://velo-backend-ajjw.onrender.com/api/inventory/${product.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...product, owner_id: userId }),
     });
     setEditingId(null);
-    const pRes = await fetch(`http://127.0.0.1:8000/api/inventory/${userId}`);
+    const pRes = await fetch(`https://velo-backend-ajjw.onrender.com/api/inventory/${userId}`);
     if (pRes.ok) setProducts(await pRes.json());
   };
 
@@ -111,7 +111,7 @@ export default function DashboardPage() {
     if (!saleData.productId || !userId) return;
     setSaleStatus("loading");
     
-    const res = await fetch("http://127.0.0.1:8000/api/sales/new", {
+    const res = await fetch("https://velo-backend-ajjw.onrender.com/api/sales/new", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ product_id: parseInt(saleData.productId), quantity: saleData.quantity, owner_id: userId }),
@@ -119,7 +119,7 @@ export default function DashboardPage() {
 
     if (res.ok) {
       setSaleStatus("success");
-      const [pRes, sRes] = await Promise.all([fetch(`http://127.0.0.1:8000/api/inventory/${userId}`), fetch(`http://127.0.0.1:8000/api/sales/${userId}`)]);
+      const [pRes, sRes] = await Promise.all([fetch(`https://velo-backend-ajjw.onrender.com/api/inventory/${userId}`), fetch(`https://velo-backend-ajjw.onrender.com/api/sales/${userId}`)]);
       if(pRes.ok) setProducts(await pRes.json());
       if(sRes.ok) setStats(await sRes.json());
       
