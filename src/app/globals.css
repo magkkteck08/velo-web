@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-navy: #03080f;
+  --color-navy2: #060e1c;
+  --color-navy3: #0a1628;
+  --color-el: #00d4ff;
+  --color-eldim: rgba(0, 212, 255, 0.1);
+  --color-elglow: rgba(0, 212, 255, 0.35);
+  --color-lime: #aaff2e;
+  --color-org: #ff5722;
+  --color-gold: #ffd84d;
+  --color-w: #eef2ff;
+  --color-g: #6b7fa3;
+  --color-b: rgba(0, 212, 255, 0.12);
+
+  /* Typography */
+  --font-sans: "Cabinet Grotesk", sans-serif;
+  --font-bebas: var(--font-bebas), "Bebas Neue", sans-serif;
+}
+
+@layer base {
+  body {
+    /* Using the new variables natively */
+    background-color: var(--color-navy);
+    color: var(--color-w);
+    overflow-x: hidden;
+    cursor: none;
+    font-family: var(--font-sans);
+  }
+
+  /* The global SVG Noise Overlay */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 8000;
+  }
+}
